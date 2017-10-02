@@ -1,12 +1,12 @@
 package chatbotProject;
 
-public class chatbotAlexLeon implements Topic {
+public class AlexChatbot implements Topic {
 	
 	private String[] keywords;
 	private String[] goodbyeWords;
 	private String secretWord;
 	
-	public chatbotAlexLeon() {
+	public AlexChatbot() {
 		String[] temp = {"food","entertainment","Internet","video games",""};
 		keywords = temp;
 		String[] temp2 = {"bye","goodbye","stop"};
@@ -18,7 +18,7 @@ public class chatbotAlexLeon implements Topic {
 	public boolean isTriggered(String response) {
 		// TODO Auto-generated method stub
 		for(int i = 0; i < keywords.length; i++) {
-			if(chatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
+			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 			
 			}
 		}
@@ -31,14 +31,14 @@ public class chatbotAlexLeon implements Topic {
 		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
 		chatting = true;
 		while(chatting) {
-			response = chatbotMain.getInput();
-			if(chatbotMain.findKeyword(response, goodbyeWords, 0) >= 0) {
+			response = ChatbotMain.getInput();
+			if(ChatbotMain.findKeyword(response, goodbyeWords, 0) >= 0) {
 				chatting = false;
-				chatbotMain.chatbot.startTalking();
-			}else if(chatbotMain.findKeyword(response, secretWord, 0) >= 0) {
-				chatbotMain.print("Oh my goodness! You guessed my favorite thing ever. We are friends now.");
+				ChatbotMain.chatbot.startTalking();
+			}else if(ChatbotMain.findKeyword(response, secretWord, 0) >= 0) {
+				ChatbotMain.print("Oh my goodness! You guessed my favorite thing ever. We are friends now.");
 			}else {
-				chatbotMain.print("Huh. I don't really get you. Tell me something else?");
+				ChatbotMain.print("Huh. I don't really get you. Tell me something else?");
 			}
 		}
 	}
