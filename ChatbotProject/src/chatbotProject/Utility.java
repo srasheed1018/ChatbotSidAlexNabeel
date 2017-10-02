@@ -8,12 +8,12 @@ import java.util.Scanner;
 public class Utility{
 
 	private static Scanner inputSource = new Scanner(System.in);
-
+	private static String[] words= {"good","great","okay"}; 
 
 	public static void main(String[] args){
 		//this main method is designed to help you test your keywordIsIsolated method and noNegations method
 		if( keywordIsIsolated(4,"good","i'm good") && keywordIsIsolated(0,"good","good. how are you?") 
-				&& !keywordIsIsolated(4,"good","goodbye. i hope you feel good") && keywordIsIsolated(25,"good","goodbye. i hope you feel good")){
+				&& !keywordIsIsolated(0,"good","goodbye. i hope you feel good") && keywordIsIsolated(25,"good","goodbye. i hope you feel good")){
 			print("You passed all the keywordIsIsolated tests.");
 		}else {
 			print("You failed some of the keywordIsIsolated tests.");
@@ -21,7 +21,9 @@ public class Utility{
 		if(!noNegations("I am not great, but I am okay", 9) && noNegations("I am not great, but I am okay", 25) && noNegations("okay", 0)){
 			print("You passed all the noNegations tests.");
 		}
-
+		else {
+			print("You failed some of the NoNegation tests.");
+	}
 	}
 
 	/**
@@ -51,8 +53,10 @@ public class Utility{
 	
 	
 	public static boolean keywordIsIsolated(int psn, String keyword, String s){
-		if(psn == 0)
+		if(psn == 0 && (s.charAt(psn + keyword.length())== s.length() || psn + keyword.length() ==' '))
 			return true;
+		else if(!(psn == 0 && (s.charAt(psn + keyword.length())== s.length() || psn + keyword.length() ==' ')))
+			return false;
 		else if(s.charAt(psn -1) != ' ')
 			return false;
 		else if(psn + keyword.length() == s.length())
@@ -63,9 +67,27 @@ public class Utility{
 	
 
 	public static boolean noNegations(String s, int psn){
-		return true;
-	}
-
+		int x = 0;
+		if(psn == 0) {
+			return true;
+		}
+		for(int i = 0; i < words.length;i++) {
+			if(s.contains(words[i])) {
+				x = s.indexOf(words[i].substring(0, 1)); // the index of the first letter of a word in the words array found in the string
+			}
+			if(keywordIsIsolated(x,words[i],s)) {
+				return true;
+			}
+		}
+	    if(s.substring(psn -4, psn-1).equals("not")){
+	    	return false;
+	    }
+	    if(s.substring(psn -3, psn-1).equals("no"))
+	    	return false;
+	    else {
+	    	return true;
+	    }
+	  }
 
 	public static String getInput(){
 		return inputSource.nextLine();
