@@ -13,7 +13,7 @@ public class Utility{
 	public static void main(String[] args){
 		//this main method is designed to help you test your keywordIsIsolated method and noNegations method
 		if( keywordIsIsolated(4,"good","i'm good") && keywordIsIsolated(0,"good","good. how are you?") 
-				&& !keywordIsIsolated(4,"any","anything. i hope you feel any") && keywordIsIsolated(25,"good","goodbye. i hope you feel good")){
+				&& !keywordIsIsolated(4,"good","goodbye. i hope you feel good") && keywordIsIsolated(25,"good","goodbye. i hope you feel good")){
 			print("You passed all the keywordIsIsolated tests.");
 		}else {
 			print("You failed some of the keywordIsIsolated tests.");
