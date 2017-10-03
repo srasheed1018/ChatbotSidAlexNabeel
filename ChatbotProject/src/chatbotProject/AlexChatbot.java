@@ -28,7 +28,7 @@ public class AlexChatbot implements Topic {
 		// TODO Auto-generated method stub
 		for(int i = 0; i < keywords.length; i++) {
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
-				ChatbotMain.print("What do you want to know about " + keywords[i] + " ?");
+				ChatbotMain.print("What do you want to know about " + keywords[i] + "  ?");
 			}
 		}
 		return false;
