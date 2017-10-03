@@ -4,6 +4,8 @@ public class Chatbot {
 	
 	private String userName;
 	private Topic siddeeq;
+	private Topic alex;
+	private Topic nabeel;
 	private boolean chatting;
 	
 	
@@ -18,7 +20,7 @@ public class Chatbot {
 		userName = ChatbotMain.getInput();
 		chatting = true;
 		while (chatting) {
-			ChatbotMain.print("What do you want to talk about?");
+			ChatbotMain.print("We offer discussions on types of phones, applications, and accesories. What do you want to talk about?");
 			String response = ChatbotMain.getInput();
 			if (siddeeq.isTriggered(response)) {
 				chatting = false;
