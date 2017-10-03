@@ -12,16 +12,16 @@ public class Utility{
 
 	public static void main(String[] args){
 		//this main method is designed to help you test your keywordIsIsolated method and noNegations method
-		if( keywordIsIsolated(4,"good","i'm goodbye")) {
+		if( noNegations("i'm not good", 8)) {
 			print("You passed all the keywordIsIsolated tests.");
 		}else {
 			print("You failed some of the keywordIsIsolated tests.");
 		}
-		/*if(!noNegations("I am not great, but I am okay", 9) && noNegations("I am not great, but I am okay", 25) && noNegations("okay", 0)){
+		if(!noNegations("I am not great, but I am okay", 9) && noNegations("I am not great, but I am okay", 25) && noNegations("okay", 0)){
 			print("You passed all the noNegations tests.");
 		}
 		else {
-			print("You failed some of the NoNegation tests.");*/
+			print("You failed some of the NoNegation tests.");}
 	}
 	
 
@@ -52,8 +52,10 @@ public class Utility{
 	
 	
 	public static boolean keywordIsIsolated(int psn, String keyword, String s){
-		if(psn == 0 && (s.charAt(psn + keyword.length())== s.length() || psn + keyword.length() ==' '))
+		if(psn == 0 && (s.charAt(psn + keyword.length()-1)== s.length() || psn + keyword.length() ==' '))
 			return true;
+		else if(psn == 0 && !(s.charAt(psn + keyword.length()-1)== s.length() || psn + keyword.length() ==' '))
+			return false;
 		else if(s.charAt(psn -1) != ' ')
 			return false;
 		else if(psn + keyword.length() == s.length())
@@ -63,28 +65,40 @@ public class Utility{
 		}
 	
 
-	public static boolean noNegations(String s, int psn){
-		int x = 0;
-		if(psn == 0) {
+		/**"helper method" a method that contributes 
+		 * functionality to another method. Helper methods are
+		 * very common when you need to do the same thing repeatedly
+		 * They also help make methods more readable
+		 * This method is private because it is only used 
+		 * by the method it is helping
+		 */
+		private static boolean noNegations(String phrase, 
+				int index){
+			//check for word "NO " (3 characters)
+			//check to see if there is space for the word
+			//"NO " to be in front of the index
+			if(index - 3 >=0  && 
+					phrase.substring(index-3,index).equals("no ")){
+				return false;
+			}
+			//check for "not "
+			if(index - 4 >=0  && 
+					phrase.substring(index-4,index).equals("not ")){
+				return false;
+			}
+			//check for "never "
+			if(index - 6 >=0  && 
+					phrase.substring(index-6,index).equals("never ")){
+				return false;
+			}
+			//check for "n't "
+			if(index - 4 >=0  && 
+					phrase.substring(index-4,index).equals("n't ")){
+				return false;
+			}
 			return true;
 		}
-		for(int i = 0; i < words.length;i++) {
-			if(s.contains(words[i])) {
-				x = s.indexOf(words[i].substring(0, 1)); // the index of the first letter of a word in the words array found in the string
-			}
-			if(keywordIsIsolated(x,words[i],s)) {
-				return true;
-			}
-		}
-	    if(s.substring(psn -4, psn-1).equals("not")){
-	    	return false;
-	    }
-	    if(s.substring(psn -3, psn-1).equals("no"))
-	    	return false;
-	    else {
-	    	return true;
-	    }
-	  }
+
 
 	public static String getInput(){
 		return inputSource.nextLine();
