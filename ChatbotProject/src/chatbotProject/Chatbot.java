@@ -8,7 +8,7 @@ public class Chatbot {
 	
 	
 	public Chatbot() {
-		siddeeq = new ChatbotSiddeeq();
+		siddeeq = new SiddeeqChatbot();
 		userName = "unknown user";
 		chatting = true;
 	}

@@ -1,13 +1,13 @@
 package chatbotProject;
 
-public class ChatbotSiddeeq implements Topic {
+public class SiddeeqChatbot implements Topic {
 
 	private String[] keywords;
 	private String goodbyeWord;
 	private String secretWord;
 	private boolean chatting;
 	
-	public ChatbotSiddeeq() {
+	public SiddeeqChatbot() {
 		String[] temp = {"food", "entertainment","internet","video games"};
 		keywords = temp;
 		goodbyeWord = "bye";
