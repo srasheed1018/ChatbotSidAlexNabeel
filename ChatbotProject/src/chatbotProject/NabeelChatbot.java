@@ -10,7 +10,11 @@ public class NabeelChatbot implements Topic{
 	private String[] phoneTypes = {"android", "iphone", "windows"};
 	private int j;
 	private boolean done;
-	
+	private String[] gameRec = {"Facebook "};
+	private String[] socialRec = {""};
+	private String[] productRec = {""};
+	private int selection = 1;
+
 	public NabeelChatbot() {
 		String[] temp = {}; 
 		goodbyeWord = "Go back";
@@ -34,8 +38,6 @@ public class NabeelChatbot implements Topic{
 
 	public void startChatting(String response) {
 		determineUserPhoneType(response);
-		
-		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
 		chatting = true;
 		while(chatting) {
 			response = ChatbotMain.getInput();
@@ -68,9 +70,13 @@ public class NabeelChatbot implements Topic{
 			}
 			if(j != -1)
 				done = true;
-			else if(blowUpCounter != 4) {
+			else if(blowUpCounter != 3) {
 				ChatbotMain.print("This is not a phone type");
 				blowUpCounter += 1;
+			}
+			else if(blowUpCounter ==3) {
+				ChatbotMain.print("My patience is running short answer my question!!!");
+				blowUpCounter +=1;
 			}
 			else if(blowUpCounter == 4)
 				ChatbotMain.print("You aren't the smartest are you? Answer corretly or I will kick you off my chat!!!");
@@ -80,23 +86,52 @@ public class NabeelChatbot implements Topic{
 			}
 				
 		}
-		if(j == 0 || j == 2) {
-			typeOfPhone = true;
-			androidSetUp();
+		if(j<0)
+			phoneSetUp();
 		}
-		else {
-			typeOfPhone = false;
-			iphoneSetUp();
+
+
+
+
+
+
+	private void phoneSetUp() {
+		String response= ChatbotMain.getInput().toLowerCase();
+		ChatbotMain.print("So you have an Iphone? I got some great app recomandations from you. If you wanna hear them say yes or if you wanna talk about something else let me know"); 
+			if(response.contains("recommendations")) {
+				ChatbotMain.print("Would you like to talk about games, social media or productivity apps?");
+				while(selection == 1) {
+				if(response.contains("games")) {
+					ChatbotMain.print(gameRec.toString());
+					selection = 2;
+				}
+				
+				else if(response.contains("social media")){
+					ChatbotMain.print(socialRec.toString());
+					selection = 2;
+				}
+				else if(response.contains("productivity")) {
+					ChatbotMain.print(productRec.toString());
+					selection = 2;
+				}
+				else
+					ChatbotMain.print("I don't really understand can you try using only one of the topics above or if you want to exit and talk about something else say 'talk about something else'");
+					
+			}
 		}
-		}
-sfsfsdsd
+			else
+			startTalking(response);
+			
+		
+	}
 
 
 
 
 
 
-	private void iphoneSetUp() {
+
+	private void socialRecs() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -107,7 +142,20 @@ sfsfsdsd
 
 
 
-	private void androidSetUp() {
+	private void startTalking(String response) {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+
+	private void gamesForPhones() {
+		// TODO Auto-generated method stub
+		
 	}
 }
+
