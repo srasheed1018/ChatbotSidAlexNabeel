@@ -27,7 +27,16 @@ public class Chatbot {
 				siddeeq.startChatting(response);
 			}
 			else {
-				ChatbotMain.print("I'm sorry, I don't understand.");
+				if (nabeel.isTriggered(response)) {
+					chatting = false;
+					nabeel.startChatting(response);
+				}
+				else {
+					if (alex.isTriggered(response)) {
+						chatting = false;
+						alex.startChatting(response);
+					}
+				}		
 			}
 		}
 	}
