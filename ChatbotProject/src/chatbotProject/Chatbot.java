@@ -11,6 +11,8 @@ public class Chatbot {
 	
 	public Chatbot() {
 		siddeeq = new SiddeeqChatbot();
+		nabeel = new NabeelChatbot();
+		alex = new AlexChatbot();
 		userName = "unknown user";
 		chatting = true;
 	}
