@@ -10,7 +10,7 @@ public class NabeelChatbot implements Topic{
 	private String[] phoneTypes = {"android", "iphone", "windows"};
 	private int j;
 	private boolean done;
-	private String[] gameRec = {"Facebook "};
+	private String[] gameRec = {"Angry Birds is a popular", "Clash of clans is a fun strategy game where you built you own base and attack others", "Implosion is a hack and stash shooting game that has an epic storyline",""};
 	private String[] socialRec = {""};
 	private String[] productRec = {""};
 	private int selection = 1;
@@ -87,7 +87,7 @@ public class NabeelChatbot implements Topic{
 				
 		}
 		if(j<0)
-			phoneSetUp();
+			phoneSetUp(response);
 		}
 
 
@@ -95,8 +95,8 @@ public class NabeelChatbot implements Topic{
 
 
 
-	private void phoneSetUp() {
-		String response= ChatbotMain.getInput().toLowerCase();
+	private void phoneSetUp(String response) {
+		response= ChatbotMain.getInput().toLowerCase();
 		ChatbotMain.print("So you have an Iphone? I got some great app recomandations from you. If you wanna hear them say yes or if you wanna talk about something else let me know"); 
 			if(response.contains("recommendations")) {
 				ChatbotMain.print("Would you like to talk about games, social media or productivity apps?");
