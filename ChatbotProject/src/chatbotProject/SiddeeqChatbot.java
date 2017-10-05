@@ -26,7 +26,7 @@ public class SiddeeqChatbot implements Topic {
 	
 	public String makeFunOf(String s)
 	{
-		String temp = "";
+		String temp = "\"";
 		boolean toggle = true;
 		for (int i=0; i<s.length(); i++)
 		{
@@ -41,6 +41,7 @@ public class SiddeeqChatbot implements Topic {
 			toggle = true;
 			}
 		}
+		temp = temp+"\"";
 		return temp;
 	}
 
@@ -80,17 +81,44 @@ public class SiddeeqChatbot implements Topic {
 								chatting = false;
 							}
 							else
+								if (Math.random()>0.5)
 								ChatbotMain.print(makeFunOf(response));
+								else
+								ChatbotMain.print("Say something else!! >:(");
 						}	
 				}
 				else 
 				{
 					if (chatTopic=="")
 					{
-						if (ChatbotMain.findKeyword(response, "battery", 0) >= 0 || ChatbotMain.findKeyword(response, "batteries", 0) >= 0)
+						boolean relevant = false;
+						for (int i=0; i < keywords.length; i++)
 						{
-							chatTopic = "battery";
-							ChatbotMain.print("I can rate the kind of battery! Do you know what milliamp hours (mAh) are?");
+							if (ChatbotMain.findKeyword(response, keywords[i], 0) >= 0)
+							{
+								relevant = true;
+								break;
+							}
+						}
+						if (relevant)
+						{
+							if (ChatbotMain.findKeyword(response, "battery", 0) >= 0 || ChatbotMain.findKeyword(response, "batteries", 0) >= 0)
+							{
+								chatTopic = "battery";
+								ChatbotMain.print("I can rate the kind of battery you have for screen-on time! Do you know what milliamp hours (mAh) are?");
+							}
+							if (ChatbotMain.findKeyword(response, "resolution", 0) >= 0 || ChatbotMain.findKeyword(response, "resolutions", 0) >= 0)
+							{
+								chatTopic = "resolution";
+								//TODO
+								ChatbotMain.print("this is temporary  text about resolution cause idk what to do with it");
+								chatTopic = "";
+							}
+							if (ChatbotMain.findKeyword(response, "iphone", 0) >= 0 || ChatbotMain.findKeyword(response, "iphones", 0) >= 0)
+							{
+								chatTopic = "iphone";
+								ChatbotMain.print("Interested in iPhones, are we? Whats your favorite thing about them?");
+							}
 						}
 						else
 						{
@@ -101,13 +129,9 @@ public class SiddeeqChatbot implements Topic {
 					{
 						if (chatTopic=="battery")
 						{
-							if (!(response.toLowerCase()=="yes" || response.toLowerCase()=="no"))
+							if ((response.toLowerCase().equals("yes") || response.toLowerCase().equals("no")))
 							{
-								ChatbotMain.print("Please answer yes or no.");
-							}
-							else
-							{
-								if (response.toLowerCase()=="no")
+								if (response.toLowerCase().equals("no"))
 								{
 									ChatbotMain.print("mAh means milliamp Hour and is a unit that measures (electric) power over time. Your phone and any other electronic device has a battery with some amount of mAh. Do you understand?");
 								}
@@ -117,6 +141,10 @@ public class SiddeeqChatbot implements Topic {
 									chatTopic="batterysize";
 								}
 							}
+							else
+							{
+								ChatbotMain.print("Please answer \"yes\" or \"no\"");
+							}
 						}
 						if (chatTopic=="batterysize")
 						{
@@ -124,7 +152,8 @@ public class SiddeeqChatbot implements Topic {
 							{
 								int temp = Integer.parseInt(response)/850;
 								String result = Integer.toString(temp);
-								ChatbotMain.print(result);
+								ChatbotMain.print("You can expect around "+result+" hours of screen on time with that "+response+" mAh battery. Enough about that though, let's talk about soemthing else about devices.");
+								chatTopic = "";
 							}
 							catch (NumberFormatException e)
 							{
