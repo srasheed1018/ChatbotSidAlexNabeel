@@ -11,11 +11,11 @@ public class AlexChatbot implements Topic {
 	private String[] affirmingWords;
 	private String[] declineWords;
 	
-	private String[] caseInfo;
-	private String[] chargerInfo;
+	private String[] casesInfo;
+	private String[] chargersInfo;
 	private String[] headphonesInfo;
 	private String[] earphonesInfo;
-	private String[] speakerInfo;
+	private String[] speakersInfo;
 	private boolean chatting;
 	
 	public AlexChatbot() {
@@ -41,15 +41,17 @@ public class AlexChatbot implements Topic {
 		descriptionWords = temp5;
 		
 		String[] temp9 = {"Popular cases include Otterbox, Speck, Griffin, and Caseology.","When purchasing a case for your smartphone, you should take size, style, and strength into consideration.","The best smartphone cases are the customizable one made by Otterbox -- military grade."};
-		caseInfo = temp9;
+		casesInfo = temp9;
 		String[] temp10 = {"Chargers come in many different forms nowadays : bases, docks, and battery boxes.","A good charge is portable, will charge your phone in a short period of time, and will last a long time too.","The best chargers are made by Jackery."};
-		chargerInfo = temp10;	
+		chargersInfo = temp10;	
 		String[] temp11 = {"Headphones come in three types : in-ear, over-ear, and on-ear.","A good pair of headphones fits the consumer nicely and comfortably.","The best headphones are made by Beats."};
 		headphonesInfo = temp11;
 		String[] temp12 = {"Earphones can be wired or wireless.","A great pair of earphones are portable and don't wear too easily.","The best pair of earphones are given to Apple users for free."};
 		earphonesInfo = temp12;
 		String[] temp13 = {"Speakers come in all sizes and colors.","A good speakers, as with all accessories is portable, but can also be brought to a party.","There isn't a company who has managed to dominate the speaker market."};
-		speakerInfo = temp13;
+		speakersInfo = temp13;
+		
+		
 	}
 
 	@Override
@@ -66,16 +68,41 @@ public class AlexChatbot implements Topic {
 	}
 	@Override
 	public void startChatting(String response) {
+		// Nockles : refer back to previous Chatbot opinions AND have the chatbot get more excited
 		// TODO Auto-generated method stub
-		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more! I can answer three questions regarding any of the following accessories : cases,chargers,headphones,earphones,speakers. The accessory questions I can answer include : types of that accessory, what qualities make that particular accessory good, and which companies are best to purhcase that accessory from.");
+		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more! I can answer three questions regarding any of the following accessories : cases,chargers,headphones,earphones,speakers.");
 		chatting = true;
 		while(chatting) {
 			response = ChatbotMain.getInput();
-			
+			//String qNumber = ChatbotMain.getInput();
+			//int questionNumber = parseInt(qNumber);
 			for(int i =0; i < keywords.length; i++) {
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 				ChatbotMain.print("What do you want to know about" + keywords[i] + "?" + " 1.Types of " + keywords[i] + "." + " 2.Qualities that make good " + keywords[i] + " or 3.the best company to purchase " + keywords[i] + "from?" + "To ask any of these questions, type in the number for the corresponding question.");
+				
+				if(response!= "1" && response!= "2" && response!= "3") {
+					ChatbotMain.print("Please type the numbers 1,2, or 3 to ask a question about" + keywords[i]);
+				}
+				else {
+					if(keywords[i] == "cases") {
+						ChatbotMain.print(casesInfo[questionNumber]);
+					}
+					if(keywords[i] == "chargers") {
+						ChatbotMain.print(chargersInfo[questionNumber]);
+					}
+					if(keywords[i] == "headphones") {
+						ChatbotMain.print(headphonesInfo[questionNumber]);
+					}
+					if(keywords[i] == "earphones") {
+						ChatbotMain.print(earphonesInfo[questionNumber]);
+					}
+					if(keywords[i] == "speakers") {
+						ChatbotMain.print(speakersInfo[questionNumber]);
+					}
+					// return the proper index of the proper string
+				}
 			}
+			
 			if(ChatbotMain.findKeyword(response, goodbyeWords[i], 0) >= 0) {
 			
 			}
