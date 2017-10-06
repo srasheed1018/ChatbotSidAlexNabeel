@@ -8,6 +8,10 @@ public class SiddeeqChatbot implements Topic {
 	private String chatTopic = "";
 	private boolean chatting;
 	private int repetition = 0;
+	private String iphoneLike;
+	private String androidLike;
+	private String iphoneHate;
+	private String androidHate;
 	
 	public SiddeeqChatbot() {
 	}
@@ -162,6 +166,68 @@ public class SiddeeqChatbot implements Topic {
 								else
 								ChatbotMain.print("Please input a number.");
 							}
+						}
+						if (chatTopic=="iphone")
+						{
+							if (ChatbotMain.findKeyword(response, "like", 0) >=0)
+							{
+								iphoneLike = response.substring(ChatbotMain.findKeyword(response, "like", 0), ChatbotMain.findKeyword(response, "like", 0)+5);
+							}
+							else
+							{
+								iphoneLike = response;
+								
+							}
+							ChatbotMain.print("You know what, I like "+iphoneLike+" too! What do you hate about androids?");
+							chatTopic = "androidHate";
+						}
+						if (chatTopic=="android")
+						{
+							if (ChatbotMain.findKeyword(response, "like", 0) >=0)
+							{
+								androidLike = response.substring(ChatbotMain.findKeyword(response, "like", 0), ChatbotMain.findKeyword(response, "like", 0)+5);
+							}
+							else
+							{
+								androidLike = response;
+								
+							}
+							ChatbotMain.print("You know what, I like "+iphoneLike+" too! What do you hate about iphones?");
+							chatTopic = "iphoneHate";
+						}
+						if (chatTopic=="androidHate")
+						{
+							if (ChatbotMain.findKeyword(response, "hate", 0) >=0)
+							{
+								androidHate = response.substring(ChatbotMain.findKeyword(response, "hate", 0), ChatbotMain.findKeyword(response, "hate", 0)+5);
+							}
+							else
+							{
+								androidHate = response;
+								
+							}
+							ChatbotMain.print("I know, I hate "+androidHate+" too! If only they were like certain OTHER devices. Everyone likes a phone that "+iphoneLike+", right? Lets talk about something else.");
+							iphoneLike = "";
+							iphoneHate = "";
+							androidHate = "";
+							androidLike = "";
+						}
+						if (chatTopic=="iphoneHate")
+						{
+							if (ChatbotMain.findKeyword(response, "hate", 0) >=0)
+							{
+								iphoneHate = response.substring(ChatbotMain.findKeyword(response, "hate", 0), ChatbotMain.findKeyword(response, "hate", 0)+5);
+							}
+							else
+							{
+								iphoneHate = response;
+								
+							}
+							ChatbotMain.print("I know, I hate "+iphoneHate+" too! If only they were like certain OTHER devices. Everyone likes a phone that "+androidLike+", right? Lets talk about something else.");
+							iphoneLike = "";
+							iphoneHate = "";
+							androidHate = "";
+							androidLike = "";
 						}
 					}
 				}
