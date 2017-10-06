@@ -1,8 +1,8 @@
 package chatbotProject;
 
 public class NabeelChatbot implements Topic{
-	
-	private String[] keywords ={"apps", "facebook", "Twitter","Snapchat"};;
+
+	private String[] keywords ={"apps","app", "facebook", "Twitter","Snapchat"};;
 	private String goodbyeWord;
 	private String secretWord;
 	private boolean chatting;
@@ -21,13 +21,13 @@ public class NabeelChatbot implements Topic{
 		secretWord = "Best ";
 		j=-1; 
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	public boolean isTriggered(String response) {
 		for(int i=0; i< keywords.length; i++) {
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0)
@@ -46,8 +46,8 @@ public class NabeelChatbot implements Topic{
 				ChatbotMain.chatbot.startTalking();
 			}
 			else if(ChatbotMain.findKeyword(response, secretWord, 0) >= 0){
-					ChatbotMain.print(" WOW1 Yuo guessed my favorite thing!");
-		}
+				ChatbotMain.print(" WOW1 Yuo guessed my favorite thing!");
+			}
 			else
 				ChatbotMain.print(" Huh! I don't understand! Try again!");
 		}
@@ -57,38 +57,46 @@ public class NabeelChatbot implements Topic{
 
 	public void determineUserPhoneType(String response) {
 		ChatbotMain.print("What type of phone do you have?");
-		response = ChatbotMain.getInput();
-		response = response.toLowerCase();
 		done = false;
 		int blowUpCounter = 0; 
 		while(done == false) {
-			for(int i =0; i< response.length();i++) {
+			response = ChatbotMain.getInput().toLowerCase();
+			boolean phoneType = false;
+			for(int i =0; i< phoneTypes.length;i++) {
 				if(response.contains(phoneTypes[i])) {
 					j = i;
+					phoneType = true;
 					break;
 				}
 			}
-			if(j != -1)
-				done = true;
-			else if(blowUpCounter != 3) {
-				ChatbotMain.print("This is not a phone type");
+			if(phoneType == false) {
+				ChatbotMain.print("That is not a phone type. Type something else");
 				blowUpCounter += 1;
-			}
-			else if(blowUpCounter ==3) {
-				ChatbotMain.print("My patience is running short answer my question!!!");
-				blowUpCounter +=1;
-			}
-			else if(blowUpCounter == 4)
-				ChatbotMain.print("You aren't the smartest are you? Answer corretly or I will kick you off my chat!!!");
-			else {
-				ChatbotMain.print("GET OFF");
-				ChatbotMain.chatbot.startTalking();
-			}
+
+			}else {
+					if(j != -1) {
+						done = true;
+					}
+					else if(blowUpCounter ==3) {
+						ChatbotMain.print("My patience is running short answer my question!!!");
+						blowUpCounter +=1;
+					}
+					else if(blowUpCounter == 4) {
+						ChatbotMain.print("You aren't the smartest are you? Answer corretly or I will kick you off my chat!!!");
+						blowUpCounter += 1;
+					}
+					else {
+						ChatbotMain.print("GET OFF");
+						ChatbotMain.chatbot.startTalking();
+					}
 				
+			}
+
+
 		}
-		if(j<0)
+		if(j==0 || j ==1 || j==2)
 			phoneSetUp(response);
-		}
+	}
 
 
 
@@ -96,16 +104,18 @@ public class NabeelChatbot implements Topic{
 
 
 	private void phoneSetUp(String response) {
-		response= ChatbotMain.getInput().toLowerCase();
-		ChatbotMain.print("So you have an Iphone? I got some great app recomandations from you. If you wanna hear them say yes or if you wanna talk about something else let me know"); 
-			if(response.contains("recommendations")) {
-				ChatbotMain.print("Would you like to talk about games, social media or productivity apps?");
-				while(selection == 1) {
+		ChatbotMain.print("So you have an "+phoneTypes[j]+" phone I got some great app recommendations from you. If you wanna hear them say yes or if you wanna talk about something else let me know"); 
+		response = ChatbotMain.getInput().toLowerCase();
+		if(response.contains("recommendations")|| response.contains("yes") ||response.contains("recs") ||response.contains("recommandation")) {
+			
+			ChatbotMain.print("Would you like to talk about games, social media or productivity apps?");
+			while(selection == 1) {
+				if(response.contains("talk about somthing else"))
 				if(response.contains("games")) {
 					ChatbotMain.print(gameRec.toString());
 					selection = 2;
 				}
-				
+
 				else if(response.contains("social media")){
 					ChatbotMain.print(socialRec.toString());
 					selection = 2;
@@ -116,13 +126,13 @@ public class NabeelChatbot implements Topic{
 				}
 				else
 					ChatbotMain.print("I don't really understand can you try using only one of the topics above or if you want to exit and talk about something else say 'talk about something else'");
-					
+
 			}
 		}
-			else
+		else
 			startTalking(response);
-			
-		
+
+
 	}
 
 
@@ -133,7 +143,7 @@ public class NabeelChatbot implements Topic{
 
 	private void socialRecs() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -144,7 +154,7 @@ public class NabeelChatbot implements Topic{
 
 	private void startTalking(String response) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -155,7 +165,7 @@ public class NabeelChatbot implements Topic{
 
 	private void gamesForPhones() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
 
