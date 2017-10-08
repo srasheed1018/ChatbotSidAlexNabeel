@@ -158,7 +158,7 @@ public class NabeelChatbot implements Topic {
 	}
 	
 	private void determineWhatTypeOfApp(String response) {
-		// TODO Auto-generated method stub
+kl
 		
 	}
 
