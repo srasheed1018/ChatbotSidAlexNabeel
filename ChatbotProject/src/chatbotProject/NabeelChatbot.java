@@ -18,10 +18,10 @@ public class NabeelChatbot implements Topic {
 			"Snapchat is an instant video/picture sharing app", "Instragram is used predominantly to post pictures" };
 	private String[] productRec = { "" };
 	private int selection = 1;
-	private boolean facebook= false; 
+	private boolean facebook = false;
 	private int next = 0;
 	private boolean snapchat = false;
-	private boolean news = false; 
+	private boolean news = false;
 
 	public NabeelChatbot() {
 		String[] temp = {};
@@ -54,6 +54,7 @@ public class NabeelChatbot implements Topic {
 	}
 
 	public void determineUserPhoneType(String response) {
+		ChatbotMain.print("Hi!!! My name is Neko");
 		ChatbotMain.print("What type of phone do you have?");
 		done = false;
 		int blowUpCounter = 0;
@@ -88,10 +89,10 @@ public class NabeelChatbot implements Topic {
 			phoneSetUp(response);
 	}
 
-	private void phoneSetUp(String response) {
+	public void phoneSetUp(String response) {
 		// boolean boo = false;
 		ChatbotMain.print("So you have an " + phoneTypes[j]
-				+ " phone I got some great app recommendations from you. If you wanna hear them say yes or if you wanna talk about something else let me know");
+				+ " phone I got some great app recommendations from you. If you wanna hear them say yes or if you wanna talk about something else say no");
 		response = ChatbotMain.getInput().toLowerCase();
 		if (response.contains("recommendations") || response.contains("yes") || response.contains("recs")
 				|| response.contains("recommandation")) {
@@ -100,7 +101,7 @@ public class NabeelChatbot implements Topic {
 				response = ChatbotMain.getInput().toLowerCase();
 				if (response.contains("games") || response.contains("game")) {
 					ChatbotMain.print(printOut(gameRec));
-					selection = 2;
+					selection = 3;
 				}
 
 				else if (response.contains("social media") || response.contains("social")
@@ -109,14 +110,15 @@ public class NabeelChatbot implements Topic {
 					selection = 2;
 				} else if (response.contains("productivity")) {
 					ChatbotMain.print(printOut(productRec));
-					selection = 2;
+					selection = 4;
 				} else
 					ChatbotMain.print(
 							"I don't really understand can you try using only one of the topics above or if you want to exit and talk about something else say 'talk about something else'");
 
 			}
-			if (selection == 2)
+			if (selection >1) {
 				nextPart(response);
+			}
 		} else if (!(response.contains("recommendations") || response.contains("yes") || response.contains("recs")
 				|| response.contains("recommandation"))) {
 			nextPart(response);
@@ -127,57 +129,103 @@ public class NabeelChatbot implements Topic {
 		 */
 	}
 
-	private void nextPart(String response) {
+	public void nextPart(String response) {
 		ChatbotMain.print("Well what else would you like to talk about?");
 		response = ChatbotMain.getInput().toLowerCase();
 		if (response.contains("facebook")) {
 			facebook = true;
 			ChatbotMain.print("What about Facebook do you want to talk about?");
 			response = ChatbotMain.getInput().toLowerCase();
-			chatFacebook(response);
-		}
-		else if(response.contains("snapchat")) {
+			chatSocial(response);
+		} else if (response.contains("snapchat")) {
 			snapchat = true;
 			ChatbotMain.print("What about SnapChat do you want to talk about?");
 			response = ChatbotMain.getInput().toLowerCase();
-			chatSnapchat(response);
-		}
-		else if(response.contains("news")){
-			news =true;
-			ChatbotMain.print("What about News do you want to talk about?");
+			chatSocial(response);
+		} else if (response.contains("news")) {
+			news = true;
+			ChatbotMain.print(
+					"What about News do you want to talk about? I can talk about the CNN app, New York Times app, and the ALjazeera app.");
 			response = ChatbotMain.getInput().toLowerCase();
 			chatNews(response);
-			
+
+		} else if(response.contains("games") || response.contains("game")) {
+			ChatbotMain.print("Cool games. Which ones?");
+			response = ChatbotMain.getInput().toLowerCase();
+			chatGame(response);
 		}
 		else {
-			ChatbotMain.print("Hey I dont know much about this topic, can you specify if its an app?");
+			ChatbotMain.print("Hey I dont know much about this topic, can you specify what type of app it is?");
 			response = ChatbotMain.getInput().toLowerCase();
 			determineWhatTypeOfApp(response);
-			
+
 		}
 	}
-	
-	private void determineWhatTypeOfApp(String response) {
-kl
+
+	public void chatSocial(String response) {
+		
+
+	}
+
+	public void determineWhatTypeOfApp(String response) {
+		int i =0;
+		boolean in = true;
+		while(i ==0) {
+			if(in == false){
+			response = ChatbotMain.getInput().toLowerCase();
+		}
+			 if(response.contains("games") ||response.contains("game") || response.contains("fun"))	{
+				if(selection ==3) {
+					ChatbotMain.print("Do you play any of the games that I recommended above?");
+					response = ChatbotMain.getInput().toLowerCase();
+					if(response.contains("yes") || response.contains("ya")) {
+						ChatbotMain.print("Awesome, those are some of my favorite games, I'm glad that you have tried them");
+						ChatbotMain.print("Do you wanna talk about those apps or another game?");
+						response = ChatbotMain.getInput().toLowerCase();
+						selection = 5;
+						chatGame(response);
+						i =2;
+					}
+				}
+				else {
+					ChatbotMain.print("What games do you wanna talk about? I can talk about shooting games, racing games, and strategy games.");
+					response = ChatbotMain.getInput().toLowerCase();
+					chatGame(response);
+					i=2;
+				}
+			}
+			else if(response.contains("social") || response.contains("social media")) {
+				ChatbotMain.print("So you want to talk about a social media app? Which one do you use the most?");
+				response = ChatbotMain.getInput().toLowerCase();
+				chatGame(response);
+				i=2;
+			}
+			else if(response.contains("news")) {
+				ChatbotMain.print("What about News do you want to talk about? I can talk about the CNN app, New York Times app, and the ALjazeera app.");
+				response = ChatbotMain.getInput().toLowerCase();
+				chatNews(response);
+				i=2;
+			}
+			else {
+				ChatbotMain.print("Sorry I can't talk about that. Please pick between news apps, games apps, and social media apps.");
+				in = false; 
+			}
+		}
+		
 		
 	}
 
-	private void chatNews(String response) {
+	public void chatGame(String response) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void chatSnapchat(String response) {
+	public void chatNews(String response) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	private void chatFacebook(String response) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private String printOut(String[] itemRec) {
+	public String printOut(String[] itemRec) {
 		String result = "";
 		for (int i = 0; i < itemRec.length; i++) {
 			result += itemRec[i] + System.lineSeparator();
