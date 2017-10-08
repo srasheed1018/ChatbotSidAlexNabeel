@@ -162,11 +162,6 @@ public class NabeelChatbot implements Topic {
 		}
 	}
 
-	public void chatSocial(String response) {
-		
-
-	}
-
 	public void determineWhatTypeOfApp(String response) {
 		int i =0;
 		boolean in = true;
@@ -215,6 +210,11 @@ public class NabeelChatbot implements Topic {
 		
 	}
 
+	public void chatSocial(String response) {
+		
+
+	}
+
 	public void chatGame(String response) {
 		// TODO Auto-generated method stub
 		
@@ -225,6 +225,12 @@ public class NabeelChatbot implements Topic {
 
 	}
 
+	public String quizTime(String response) {
+		ChatbotMain.print("Looks like its time to go soon, before we leave you wanna take a quiz on how well you got to know me?");
+		if()
+			
+		})
+	}
 	public String printOut(String[] itemRec) {
 		String result = "";
 		for (int i = 0; i < itemRec.length; i++) {
