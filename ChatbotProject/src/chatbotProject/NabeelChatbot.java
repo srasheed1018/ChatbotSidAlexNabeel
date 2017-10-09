@@ -29,9 +29,6 @@ public class NabeelChatbot implements Topic {
 	private boolean limit=false;
 
 	public NabeelChatbot() {
-		String[] temp = {};
-		goodbyeWord = "Go back";
-		secretWord = "Best ";
 		j = -1;
 	}
 
@@ -45,17 +42,6 @@ public class NabeelChatbot implements Topic {
 
 	public void startChatting(String response) {
 		determineUserPhoneType(response);
-		chatting = true;
-		while (chatting) {
-			response = ChatbotMain.getInput();
-			if (ChatbotMain.findKeyword(response, goodbyeWord, 0) >= 0) {
-				chatting = false;
-				ChatbotMain.chatbot.startTalking();
-			} else if (ChatbotMain.findKeyword(response, secretWord, 0) >= 0) {
-				ChatbotMain.print(" WOW1 Yuo guessed my favorite thing!");
-			} else
-				ChatbotMain.print(" Huh! I don't understand! Try again!");
-		}
 	}
 
 	public void determineUserPhoneType(String response) {
@@ -200,8 +186,63 @@ public class NabeelChatbot implements Topic {
 	}
 
 	public void chatSocial(String response) {
-
+		int n =0;
+		if(limitless == false) {
+		if(facebook == true) {
+		ChatbotMain.print("Looks like you have a Facebook account. Using its messenger features I chat with other chat bot freinds discussing the latest chat bots that have been realeased. Who do you chat with on the messenger?");
+		response =  ChatbotMain.getInput().toLowerCase();
+			if(response.contains("chat with friends") || response.contains("friends") ||response.contains("chat")) {
+				ChatbotMain.print("Good to know you have freinds human. I was starting to think that you were to boring to have those.");
+				limitless = true;
+			}
+			else {
+				limitless =true; 
+				ChatbotMain.print("Wow your so boring and don't even have friends? Your lamer than a badly constructed chat bot like me. Pathetic.");
 	}
+		}
+		if(snapchat == true) {
+			ChatbotMain.print("Looks like you have a Snapchat account. Using its features I send snaps to my other chat bot freinds exposing my inner code sometimes. How many streaks do you have(numeric value)?");
+			response =  ChatbotMain.getInput().toLowerCase();
+			while(n ==0)	{
+			if(Integer.parseInt(response)> 0) {
+					ChatbotMain.print("Good to know you have friends and streaks human. I was starting to think that you were to boring to have those.");
+					limitless = true;
+					n=2;
+				}
+				else if(Integer.parseInt(response) == 0) {
+					ChatbotMain.print("Wow your so boring and don't even have one streak? Your lamer than a badly constructed chat bot like me. Pathetic.");
+		            limitless = true;
+					n=1;
+				}else {
+					ChatbotMain.print("I SAID NUMERIC VALUE. Lets do this again");
+					ChatbotMain.print("How many streaks do you have and this time give me a number only.");
+					response =  ChatbotMain.getInput().toLowerCase();
+
+				}
+			}
+		}
+		}
+		if(!(facebook ==true) && !(snapchat ==true)) {
+		ChatbotMain.print("It looks like we dont have any social media apps in common");
+		ChatbotMain.print("Do you have any social media apps at all?");
+		response =  ChatbotMain.getInput().toLowerCase();
+		if(response.contains("yes") || response.contains("yep"))
+			ChatbotMain.print("Cool guess our tastes are very different");
+		else {
+			ChatbotMain.print("How come, is it an age thing or like you too cool for them social media apps");
+			if(response.contains("age"))
+				ChatbotMain.print("Good call, thiers lots of dangers on these apps, even for a chat bot like me!");
+			else {
+				ChatbotMain.print("Your definitely not cool. GET OFF YOU WIERDO!!");
+				ChatbotMain.chatbot.startTalking();
+			}
+		}
+		}
+		ChatbotMain.print("Well you can pick to talk about other social media apps or games");
+		response = ChatbotMain.getInput().toLowerCase();
+		limit =true;
+		determineNexPart(response);
+		}
 
 	public void chatGame(String response) {
 		if(selection == 5) {
@@ -226,17 +267,32 @@ public class NabeelChatbot implements Topic {
 			ChatbotMain.print("Well thats too bad");
 		}
 		if(limitless == false && limit == false) {
-		ChatbotMain.print("Whats you favorite? Shooting or racing (Choose one)");
+		ChatbotMain.print("Whats you favorite type of game? Shooting or racing (Choose one)");
 		response = ChatbotMain.getInput().toLowerCase();
 	}
 		if(response.contains("shooting")){
-			ChatbotMain.print("I see that you like shooting games, have you ever played any of these games: Left for dead, );
+			ChatbotMain.print("I see that you like shooting games, have you ever played any of these games: Left for dead or Hitman Sniper?");
+			response = ChatbotMain.getInput().toLowerCase();
+			if(response.contains("yes") || response.contains("yep")) {
+				ChatbotMain.print("Great, I personally perfer Hitman Sniper, its much more un and goal. While Left for dead can get boring fast.");
+				ChatbotMain.print("Well you can pick to talk about other types of games or social media apps");
+				response = ChatbotMain.getInput().toLowerCase();
+				limit =true;
+				determineNexPart(response);
+			}
+			else {
+				ChatbotMain.print("Well you have no clue what your missing out on. After you finish talking to me make sure you atleast try Hitman Sniper.");
+				ChatbotMain.print("Well for now you can pick to talk about other types of games or social media apps");
+				response = ChatbotMain.getInput().toLowerCase();
+				limit =true;
+				determineNexPart(response);
+			}
 		}else if(response.contains("racing")) {
 			ChatbotMain.print("I love racing, its my favorite type of gaming, what do you like about it?");
 			response = ChatbotMain.getInput().toLowerCase();
 			if(response.contains("like") || response.contains("best") || response.contains("love")) {
 				ChatbotMain.print("That is really cool. I often play Asphalt 8 its has one ofnthe best graphics for any game, not just racing.");
-				ChatbotMain.print("Well you can pick to talk about other types of games or social media or news apps");
+				ChatbotMain.print("Well you can pick to talk about other types of games or social media apps");
 				response = ChatbotMain.getInput().toLowerCase();
 				limitless =true;
 				determineNexPart(response);
