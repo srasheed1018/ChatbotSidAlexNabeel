@@ -162,6 +162,7 @@ public class NabeelChatbot implements Topic {
 		}
 	}
 
+	
 	public void determineWhatTypeOfApp(String response) {
 		int i =0;
 		boolean in = true;
@@ -216,14 +217,22 @@ public class NabeelChatbot implements Topic {
 	}
 
 	public void chatGame(String response) {
-		// TODO Auto-generated method stub
-		
+		if(selection == 5) {
+			if(response.contains("yes") || response.contains("ya")) {
+
+			}
+			else {
+				ChatbotMain.print("Well ");
+		}
+		}
+			
+			
 	}
 
 	public void chatNews(String response) {
-		// TODO Auto-generated method stub
-
-	}
+			// TODO Auto-generated method stub
+			
+		}
 
 	public String quizTime(String response) {
 		ChatbotMain.print("Looks like its time to go soon, before we leave you wanna take a quiz on how well you got to know me?");
