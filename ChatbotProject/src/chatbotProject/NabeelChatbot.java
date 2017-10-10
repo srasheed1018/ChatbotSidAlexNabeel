@@ -27,8 +27,12 @@ public class NabeelChatbot implements Topic {
 	private boolean news = false;
 	private boolean limitless=false;
 	private boolean limit=false;
+	private int blowUpCounter;
+	private boolean hasBeenVisited;
 
 	public NabeelChatbot() {
+		blowUpCounter = 0;
+		hasBeenVisited = false;
 		j = -1;
 	}
 
@@ -48,7 +52,7 @@ public class NabeelChatbot implements Topic {
 		ChatbotMain.print("Hi!!! My name is Neko");
 		ChatbotMain.print("What type of phone do you have?");
 		done = false;
-		int blowUpCounter = 0;
+		
 		while (done == false) {
 			response = ChatbotMain.getInput().toLowerCase();
 			boolean phoneType = false;
