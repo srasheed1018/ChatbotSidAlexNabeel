@@ -2,6 +2,7 @@ package chatbotProject;
 
 public class AlexChatbot implements Topic {
 	
+	private String selectedkeyword = "accessories";
 	private String[] keywords;
 	private String[] goodbyeWords;
 	private String[] feelingWords;
@@ -72,32 +73,32 @@ public class AlexChatbot implements Topic {
 		// TODO Auto-generated method stub
 		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more! I can answer three questions regarding any of the following accessories : cases,chargers,headphones,earphones,speakers.");
 		chatting = true;
+		int questionNum = parseInt(response);
 		while(chatting) {
-			response = ChatbotMain.getInput();
+			response = ChatbotMain.getInput().toLowerCase();
 			//String qNumber = ChatbotMain.getInput();
 			//int questionNumber = parseInt(qNumber);
 			for(int i =0; i < keywords.length; i++) {
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
 				ChatbotMain.print("What do you want to know about" + keywords[i] + "?" + " 1.Types of " + keywords[i] + "." + " 2.Qualities that make good " + keywords[i] + " or 3.the best company to purchase " + keywords[i] + "from?" + "To ask any of these questions, type in the number for the corresponding question.");
-				
 				if(response!= "1" && response!= "2" && response!= "3") {
 					ChatbotMain.print("Please type the numbers 1,2, or 3 to ask a question about" + keywords[i]);
 				}
 				else {
 					if(keywords[i] == "cases") {
-						ChatbotMain.print(casesInfo[questionNumber]);
+						ChatbotMain.print(casesInfo[questionNum]);
 					}
 					if(keywords[i] == "chargers") {
-						ChatbotMain.print(chargersInfo[questionNumber]);
+						ChatbotMain.print(chargersInfo[questionNum]);
 					}
 					if(keywords[i] == "headphones") {
-						ChatbotMain.print(headphonesInfo[questionNumber]);
+						ChatbotMain.print(headphonesInfo[questionNum]);
 					}
 					if(keywords[i] == "earphones") {
-						ChatbotMain.print(earphonesInfo[questionNumber]);
+						ChatbotMain.print(earphonesInfo[questionNum]);
 					}
 					if(keywords[i] == "speakers") {
-						ChatbotMain.print(speakersInfo[questionNumber]);
+						ChatbotMain.print(speakersInfo[questionNum]);
 					}
 					// return the proper index of the proper string
 				}
@@ -124,7 +125,7 @@ public class AlexChatbot implements Topic {
 			if(ChatbotMain.findKeyword(response, declineWords[i], 0) >= 0) {
 				
 			}
-			if(ChatbotMain.findKeyword(response, caseInfo[i], 0) >= 0) {
+			if(ChatbotMain.findKeyword(response, casesInfo[i], 0) >= 0) {
 				
 			}
 			
@@ -152,6 +153,11 @@ public class AlexChatbot implements Topic {
 			}
 		}
 		*/
+	}
+
+	private int parseInt(String lowerCase) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
