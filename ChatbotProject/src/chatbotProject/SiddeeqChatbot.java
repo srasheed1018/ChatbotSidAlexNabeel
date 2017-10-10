@@ -2,9 +2,10 @@ package chatbotProject;
 
 public class SiddeeqChatbot implements Topic {
 
-	private String[] keywords = {"type","battery","batteries","camera","cameras","iphone","iphones","samsung","samsungs","lg","htc","motorola","motorolas","moto","android","androids"};
+	private String[] keywords = {"types","battery","batteries","camera","cameras","iphone","iphones","samsung","samsungs","lg","htc","motorola","motorolas","moto","android","androids"};
 	private String[] goodbyeWords = {"bye", "goodbye", "stop"};
 	private String[] yesWords = {"yes", "indeed", "okay", "please do", "go ahead","please", "why not", "sure", "alright"};
+	private String[] noWords = {"no","never","not really","nah"};
 	private String[] cameraFacts = {"Major manufacturers of cameras for phones include Toshiba, ST Micro, Sharp, Omnivision, and Aptina","Phones like  Apple’s iPhone 7 Plus and the new OnePlus 5 feature two rear facing cameras to enhance their zooming capabilities.","The original iPhone and the HTC Dream (T-Mobile G1) were the first smartphones, in the modern sense of the word, and both arrived with cameras onboard."};
 	private int camFactPsn = cameraFacts.length - 1;
 	private String previousResponse = "";
@@ -37,6 +38,18 @@ public class SiddeeqChatbot implements Topic {
 		for (int i = 0; i<yesWords.length; i++)
 		{
 			if (ChatbotMain.findKeyword(s.toLowerCase(), yesWords[i], 0) >= 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isNo(String s)
+	{
+		for (int i = 0; i<noWords.length; i++)
+		{
+			if (ChatbotMain.findKeyword(s.toLowerCase(), noWords[i], 0) >= 0)
 			{
 				return true;
 			}
@@ -203,9 +216,9 @@ public class SiddeeqChatbot implements Topic {
 					{
 						if (chatTopic=="battery")
 						{
-							if ((response.toLowerCase().equals("yes") || response.toLowerCase().equals("no")))
+							if (isYes(response.toLowerCase()) || isNo(response.toLowerCase()))
 							{
-								if (response.toLowerCase().equals("no"))
+								if (isNo(response.toLowerCase()))
 								{
 									ChatbotMain.print("mAh means milliamp Hour and is a unit that measures (electric) power over time. Your phone and any other electronic device has a battery with some amount of mAh. Do you understand?");
 								}
