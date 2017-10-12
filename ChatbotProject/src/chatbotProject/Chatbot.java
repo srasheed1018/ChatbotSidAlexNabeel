@@ -2,7 +2,7 @@ package chatbotProject;
 
 public class Chatbot {
 	
-	private String userName;
+	private static String userName;
 	private Topic siddeeq;
 	private Topic alex;
 	private Topic nabeel;
@@ -41,5 +41,9 @@ public class Chatbot {
 				}		
 			}
 		}
+	}
+	public static String getUserName() {
+		return userName;
+		
 	}
 }
