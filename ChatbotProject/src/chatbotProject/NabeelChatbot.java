@@ -210,7 +210,7 @@ public class NabeelChatbot implements Topic {
 			} else if (response.contains("social") || response.contains("social media")) {
 				ChatbotMain.print("So you want to talk about a social media app? Which one do you use the most?");
 				response = ChatbotMain.getInput().toLowerCase();
-				chatGame(response);
+				chatSocial(response);
 				i = 2;
 			} else {
 				ChatbotMain.print("Sorry I can't talk about that. Let's stick to gaming apps and social media apps.");
@@ -319,7 +319,7 @@ public class NabeelChatbot implements Topic {
 		if(response.contains("shooting")){
 			ChatbotMain.print("I see that you like shooting games, have you ever played any of these games: Left for dead or Hitman Sniper?");
 			response = ChatbotMain.getInput().toLowerCase();
-			if(response.contains("yes") || response.contains("yep")) {
+			if(response.contains("yes") || response.contains("yep")||response.contains("hitman sniper")||response.contains("left for dead")) {
 				ChatbotMain.print("Great, I personally perfer Hitman Sniper, its much more fun and has a goal for every level. While Left for dead can get boring fast.");
 				ChatbotMain.print("Well you can pick to talk about other types of games or social media apps");
 				response = ChatbotMain.getInput().toLowerCase();
