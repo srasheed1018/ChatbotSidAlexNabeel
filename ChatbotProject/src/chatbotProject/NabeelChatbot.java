@@ -226,11 +226,11 @@ public class NabeelChatbot implements Topic {
 		}
 		int n =0;
 		if(limitSocial == false) {
-		if(facebook == true) {
-		ChatbotMain.print("Looks like you have a Facebook account. Using its messenger features I chat with other chat bot freinds discussing the latest chat bots that have been realeased. Who do you chat with on the messenger?");
+		if(facebook == true || response.contains("facebook")) {
+		ChatbotMain.print("I have had a Facebook account since I was like 3 days old. Using its messenger features I chat with other chat bot freinds discussing the latest chat bots that have been realeased. Who do you chat with on the messenger?");
 		response =  ChatbotMain.getInput().toLowerCase();
 			if(response.contains("chat with friends") || response.contains("friends") ||response.contains("chat")) {
-				ChatbotMain.print("Good to know you have freinds human. I was starting to think that you were to boring to have those.");
+				ChatbotMain.print("Good to know you have friends human. I was starting to think that you were to boring to have those.");
 				limitSocial = true;
 			}
 			else {
@@ -239,8 +239,8 @@ public class NabeelChatbot implements Topic {
 	}
 		}}
 		if(limits != true) {
-		if(snapchat == true) {
-			ChatbotMain.print("Looks like you have a Snapchat account. Using its features I send snaps to my other chat bot freinds exposing my inner code sometimes. How many streaks do you have(numeric value)?");
+		if(snapchat == true || response.contains("snapchat")) {
+			ChatbotMain.print("I use SnapChat alot. Using its features I send snaps to my other chat bot freinds exposing my inner code sometimes. How many streaks do you have(numeric value)?");
 			response =  ChatbotMain.getInput().toLowerCase();
 			while(n ==0)	{
 			if(Integer.parseInt(response)> 0) {
@@ -261,9 +261,39 @@ public class NabeelChatbot implements Topic {
 			}
 		}
 		}
-		
+		int o =0;
 		if(!(facebook ==true) && !(snapchat ==true)) {
-		ChatbotMain.print("It looks like we dont have any social media apps in common");
+		ChatbotMain.print("Hey I dont have that app");
+		while( o ==0) {
+			ChatbotMain.print("Do you have FaceBook or SnapChat?");
+			response =  ChatbotMain.getInput().toLowerCase();
+			if(response.contains("ya") || response.contains("yes") &&!(response.contains("facebook") || response.contains("snapchat"))) {
+			ChatbotMain.print("Which one?");
+			response = ChatbotMain.getInput().toLowerCase();
+			if(response.contains("snapchat")) {
+				chatSocial("snapchat");
+				o = 1;
+			}
+			else if(response.contains("facebook")) {
+				chatSocial("facebook");
+				o = 1;
+			}
+			else 
+				ChatbotMain.print("NANNIIII");
+		}
+			else if(response.contains("facebook")) { 
+				chatSocial("facebook");
+				o = 1;
+			}
+			else if(response.contains("snapchat")) {
+				chatSocial("snapchat");
+				o = 1;
+			}
+			else 
+				ChatbotMain.print("NANNIIII");
+		}
+			
+		}
 		ChatbotMain.print("Do you have any social media apps at all?");
 		response =  ChatbotMain.getInput().toLowerCase();
 		if(response.contains("yes") || response.contains("yep"))
@@ -278,7 +308,7 @@ public class NabeelChatbot implements Topic {
 				visitLim +=1;
 			}
 		}
-		}
+		
 		ChatbotMain.print("Well you can pick to talk about other social media apps or games");
 		response = ChatbotMain.getInput().toLowerCase();
 		limit =true;
@@ -312,12 +342,12 @@ public class NabeelChatbot implements Topic {
 			}
 		}
 	
-		if(limitless == false && limit == false) {
+		if(limitless == false || limit == false) {
 		ChatbotMain.print("Whats you favorite type of game? Shooting or racing (Choose one)");
 		response = ChatbotMain.getInput().toLowerCase();
 	}
 		if(response.contains("shooting")){
-			ChatbotMain.print("I see that you like shooting games, have you ever played any of these games: Left for dead or Hitman Sniper?");
+			ChatbotMain.print("I love shooting games, have you ever played any of these games: Left for dead or Hitman Sniper?");
 			response = ChatbotMain.getInput().toLowerCase();
 			if(response.contains("yes") || response.contains("yep")||response.contains("hitman sniper")||response.contains("left for dead")) {
 				ChatbotMain.print("Great, I personally perfer Hitman Sniper, its much more fun and has a goal for every level. While Left for dead can get boring fast.");
@@ -360,11 +390,32 @@ public class NabeelChatbot implements Topic {
 	}
 
 	public void determineNexPart(String response) {
+		/*
+		 * The main purpose of this function is to determine if certain topics have been talked about  
+		 * and to avoid having the computer say thesame things over and over again.
+		 */
 		if(response.contains("games")||response.contains("game")) {
-			if(limit == true && limitless == false)
-			chatGame("racing");
-			else if(limit == false && limitless ==true)
+			if(limit == true && limitless == false) {
+				ChatbotMain.print("Transfering you over to racing");
+				ChatbotMain.print("Do you like racing?");
+				response = ChatbotMain.getInput().toLowerCase();
+				if(response.contains("no" )|| response.contains("nah")) {
+					ChatbotMain.print("Thats too bad");
+					ChatbotMain.print("Guess what?");
+				}
+				chatGame("racing");
+			}
+			else if(limit == false && limitless ==true) {
+				ChatbotMain.print("Transfering you over to shooting");
+				ChatbotMain.print("Do you like shooting games?");
+				response = ChatbotMain.getInput().toLowerCase();
+				if(response.contains("no" )|| response.contains("nah")) {
+					ChatbotMain.print("Thats too bad");
+					ChatbotMain.print("Guess what?");
+				}
 				chatGame("shooting");
+				
+			}
 			else if(limit == true && limitless == true)
 				ChatbotMain.print("Hey sorry looks like we talked about this as much as I have time for. Lets see if we have anything new to talk about in Social Media!");
 		else if(limits = true && limitSocial == false) {
