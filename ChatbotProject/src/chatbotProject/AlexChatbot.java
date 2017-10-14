@@ -2,7 +2,6 @@ package chatbotProject;
 
 public class AlexChatbot implements Topic {
 	
-	private String selectedkeyword = "accessories";
 	private String[] keywords;
 	private String[] goodbyeWords;
 	private String[] feelingWords;
@@ -24,7 +23,7 @@ public class AlexChatbot implements Topic {
 		// 1st index : types
 		// 2nd index : what makes keyword[i] good?
 		// 3rd index : best companies to purchase one
-		String[] temp = {"cases","chargers","headphones","earphones","speakers"};
+		String[] temp = {"accessories","cases","chargers","headphones","earphones","speakers"};
 		keywords = temp;
 		String[] temp2 = {"bye","goodbye","stop"};
 		goodbyeWords = temp2;
@@ -58,52 +57,112 @@ public class AlexChatbot implements Topic {
 	@Override
 	public boolean isTriggered(String response) {
 		// TODO Auto-generated method stub
-		String selectedKeyword;
 		for(int i = 0; i < keywords.length; i++) {
 			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
-				selectedKeyword = keywords[i];
 				return true;
 			}
 		}
 		return false;
 	}
-	@Override
+	
 	public void startChatting(String response) {
 		// Nockles : refer back to previous Chatbot opinions AND have the chatbot get more excited
 		// TODO Auto-generated method stub
-		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more! I can answer three questions regarding any of the following accessories : cases,chargers,headphones,earphones,speakers.");
+		ChatbotMain.print("Type in any accessory you want to talk about. It can be the one you typed initially if you'd like.");
 		chatting = true;
-		int questionNum = parseInt(response);
+		int questionNum;
 		while(chatting) {
 			response = ChatbotMain.getInput().toLowerCase();
 			//String qNumber = ChatbotMain.getInput();
 			//int questionNumber = parseInt(qNumber);
-			for(int i =0; i < keywords.length; i++) {
-			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
-				ChatbotMain.print("What do you want to know about" + keywords[i] + "?" + " 1.Types of " + keywords[i] + "." + " 2.Qualities that make good " + keywords[i] + " or 3.the best company to purchase " + keywords[i] + "from?" + "To ask any of these questions, type in the number for the corresponding question.");
-				if(response!= "1" && response!= "2" && response!= "3") {
-					ChatbotMain.print("Please type the numbers 1,2, or 3 to ask a question about" + keywords[i]);
-				}
-				else {
-					if(keywords[i] == "cases") {
-						ChatbotMain.print(casesInfo[questionNum]);
-					}
-					if(keywords[i] == "chargers") {
-						ChatbotMain.print(chargersInfo[questionNum]);
-					}
-					if(keywords[i] == "headphones") {
-						ChatbotMain.print(headphonesInfo[questionNum]);
-					}
-					if(keywords[i] == "earphones") {
-						ChatbotMain.print(earphonesInfo[questionNum]);
-					}
-					if(keywords[i] == "speakers") {
-						ChatbotMain.print(speakersInfo[questionNum]);
-					}
-					// return the proper index of the proper string
+			for(int i =0; i < goodbyeWords.length;i++) {
+				if(response.equals(goodbyeWords[i])) {
+					ChatbotMain.print("Buh bye.");
+					chatting = false;
+					ChatbotMain.chatbot.startTalking();
 				}
 			}
-			
+			for(int i =0; i < keywords.length; i++) {
+			if(ChatbotMain.findKeyword(response, keywords[i], 0) >= 0) {
+				ChatbotMain.print("What do you want to know about " + keywords[i] + "?" + " 1.Types of " + keywords[i] + "." + " 2.Qualities that make good " + keywords[i] + " or 3.The best company to purchase " + keywords[i] + " from?" + "To ask any of these questions, type in the number for the corresponding question.");
+				response = ChatbotMain.getInput();
+				questionNum = parseInt(response);
+				if(response.equals("1") || response.equals("2") || response.equals("3")) {
+				if(response.equals("1")) {
+					if(keywords[i] == "cases") {
+						ChatbotMain.print(casesInfo[0]);
+					}
+					if(keywords[i] == "chargers") {
+						ChatbotMain.print(chargersInfo[0]);
+					}
+					if(keywords[i] == "headphones") {
+						ChatbotMain.print(headphonesInfo[0]);
+					}
+					if(keywords[i] == "earphones") {
+						ChatbotMain.print(earphonesInfo[0]);
+					}
+					if(keywords[i] == "speakers") {
+						ChatbotMain.print(speakersInfo[0]);
+					}
+				}
+				if(response.equals("2")) {
+					if(keywords[i] == "cases") {
+						ChatbotMain.print(casesInfo[1]);
+					}
+					if(keywords[i] == "chargers") {
+						ChatbotMain.print(chargersInfo[1]);
+					}
+					if(keywords[i] == "headphones") {
+						ChatbotMain.print(headphonesInfo[1]);
+					}
+					if(keywords[i] == "earphones") {
+						ChatbotMain.print(earphonesInfo[1]);
+					}
+					if(keywords[i] == "speakers") {
+						ChatbotMain.print(speakersInfo[1]);
+					}
+				}
+				if(response.equals("3")) {
+					if(keywords[i] == "cases") {
+						ChatbotMain.print(casesInfo[2]);
+					}
+					if(keywords[i] == "chargers") {
+						ChatbotMain.print(chargersInfo[2]);
+					}
+					if(keywords[i] == "headphones") {
+						ChatbotMain.print(headphonesInfo[2]);
+					}
+					if(keywords[i] == "earphones") {
+						ChatbotMain.print(earphonesInfo[2]);
+					}
+					if(keywords[i] == "speakers") {
+						ChatbotMain.print(speakersInfo[2]);
+					}
+				}
+				startChatting(response);
+				}
+				else {
+					ChatbotMain.print("Please type one of the following numbers : 1,2, or 3");
+				}
+			}}}}
+				/*else {
+					if(keywords[i] == "cases") {
+						ChatbotMain.print(casesInfo[0]);
+					}
+					if(keywords[i] == "chargers") {
+						ChatbotMain.print(chargersInfo[questionNum - 1]);
+					}
+					if(keywords[i] == "headphones") {
+						ChatbotMain.print(headphonesInfo[questionNum - 1]);
+					}
+					if(keywords[i] == "earphones") {
+						ChatbotMain.print(earphonesInfo[questionNum - 1]);
+					}
+					if(keywords[i] == "speakers") {
+						ChatbotMain.print(speakersInfo[questionNum - 1]);
+					}}}}}*/
+					// return the proper index of the proper string
+			/*
 			if(ChatbotMain.findKeyword(response, goodbyeWords[i], 0) >= 0) {
 			
 			}
@@ -133,9 +192,7 @@ public class AlexChatbot implements Topic {
 				ChatbotMain.print("What a coincidence." + "I " + feelingWords[i] + keywords[i] + "too.");
 			}else {
 				ChatbotMain.print("Huh. I don't really get you. Tell me something else?");
-			}
-			}
-		}
+			}*/
 		/*
 		ChatbotMain.print("Hey! It sounds like you and I have a common interest! Let's talk some more!");
 		chatting = true;
@@ -153,7 +210,6 @@ public class AlexChatbot implements Topic {
 			}
 		}
 		*/
-	}
 
 	private int parseInt(String lowerCase) {
 		// TODO Auto-generated method stub
