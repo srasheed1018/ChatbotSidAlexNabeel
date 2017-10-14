@@ -3,10 +3,6 @@ package chatbotProject;
 public class NabeelChatbot implements Topic {
 
 	private String[] keywords = { "apps", "app", "facebook", "Twitter", "Snapchat" };;
-	private String goodbyeWord;
-	private String secretWord;
-	private boolean chatting;
-	private boolean typeOfPhone;
 	private String[] phoneTypes = { "android", "iphone", "windows" };
 	private int j;
 	private boolean done;
@@ -24,7 +20,6 @@ public class NabeelChatbot implements Topic {
 	private boolean facebook = false;
 	private int next = 0;
 	private boolean snapchat = false;
-	private boolean news = false;
 	private boolean limitless=false;
 	private boolean limit=false;
 	private boolean limitSocial=false;
@@ -175,7 +170,12 @@ public class NabeelChatbot implements Topic {
 			}
 			response = ChatbotMain.getInput().toLowerCase();
 			chatGame(response);
+		}else if (response.contains("social") || response.contains("media")) {
+			ChatbotMain.print("So you want to talk about a social media app? Which one do you use the most?");
+			response = ChatbotMain.getInput().toLowerCase();
+			chatSocial(response);
 		}else {
+		
 			ChatbotMain.print("Hey I dont know much about this topic, can you specify what type of app it is?");
 			response = ChatbotMain.getInput().toLowerCase();
 			determineWhatTypeOfApp(response);
@@ -268,7 +268,11 @@ public class NabeelChatbot implements Topic {
 			ChatbotMain.print("Do you have FaceBook or SnapChat?");
 			response =  ChatbotMain.getInput().toLowerCase();
 			if(response.contains("ya") || response.contains("yes") &&!(response.contains("facebook") || response.contains("snapchat"))) {
-			ChatbotMain.print("Which one?");
+			ChatbotMain.print("Which one?");}
+			else if(!(response.contains("ya") || response.contains("yes") &&!(response.contains("facebook") || response.contains("snapchat")))&& (response.contains("no") || response.contains( "nope"))){
+				ChatbotMain.print("Looks like you dont have any socia media apps. Im going to lauch you into the game section and you'll never hear from me again. Bye!!");
+				chatGame("umpa lumpa");
+			}
 			response = ChatbotMain.getInput().toLowerCase();
 			if(response.contains("snapchat")) {
 				chatSocial("snapchat");
@@ -280,7 +284,7 @@ public class NabeelChatbot implements Topic {
 			}
 			else 
 				ChatbotMain.print("NANNIIII");
-		}
+		}}
 			else if(response.contains("facebook")) { 
 				chatSocial("facebook");
 				o = 1;
@@ -291,9 +295,9 @@ public class NabeelChatbot implements Topic {
 			}
 			else 
 				ChatbotMain.print("NANNIIII");
-		}
+		
 			
-		}
+		
 		ChatbotMain.print("Do you have any social media apps at all?");
 		response =  ChatbotMain.getInput().toLowerCase();
 		if(response.contains("yes") || response.contains("yep"))
@@ -390,6 +394,7 @@ public class NabeelChatbot implements Topic {
 	}
 
 	public void determineNexPart(String response) {
+
 		/*
 		 * The main purpose of this function is to determine if certain topics have been talked about  
 		 * and to avoid having the computer say thesame things over and over again.
@@ -454,6 +459,7 @@ public class NabeelChatbot implements Topic {
 			}
 		}
 	}
+	
 	public String printOut(String[] itemRec) {
 		String result = "";
 		for (int i = 0; i < itemRec.length; i++) {
